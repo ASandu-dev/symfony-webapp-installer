@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Set the project name
-project_name="mydrupalproject"
+
+cd "../"
+
+read -p "Enter project name: " projectName
 
 # Create the project directory
-mkdir "$project_name"
-cd "$project_name"
+mkdir "$projectName"
+cd "$projectName" || exit
+
+# Add php version
+read -p "Enter php version to use: " phpVersion
+echo "$phpVersion" > .phpversion
 
 # Initialize Composer project
 composer init --no-interaction --repository=https://packages.drupal.org/8 --name=drupal/project

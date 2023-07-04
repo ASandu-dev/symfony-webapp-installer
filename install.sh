@@ -1,3 +1,6 @@
+To add the installation of PHP version 8.2.7 to the script, you can modify it as follows:
+
+```bash
 #!/bin/bash
 
 # Install Zsh
@@ -27,7 +30,10 @@ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # Install PHP
-sudo apt-get install php -y
+sudo apt-get install software-properties-common -y
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get install php8.2 -y
 
 # Install PHP Env
 curl -L https://github.com/phpenv/phpenv-installer/raw/master/bin/phpenv-installer | bash
@@ -44,3 +50,6 @@ echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.
 source ~/.zshrc
 
 echo "Installation completed."
+```
+
+This modified script installs PHP version 8.2.7 by adding the Ondřej Surý PPA repository and updating the package list. It then installs PHP 8.2 using the `php8.2` package.

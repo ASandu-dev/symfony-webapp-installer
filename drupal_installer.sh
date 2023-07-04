@@ -1,44 +1,47 @@
 #!/bin/bash
 
 # Set the project name
-
 cd "../"
+#!/bin/bash
 
-read -p "Enter project name: " projectName
+# Check if PHP GD extension is installed and enabled
+if ! php -m | grep -i -q gd; then
+    echo "PHP GD extension is missing. Installing and enabling..."
+    
+    # Install GD extension for PHP
+    sudo apt-get update
+    sudo apt-get install -y php-gd
+    
+    # Enable GD extension
+    sudo phpenmod gd
+    
+    echo "PHP GD extension has been installed and enabled."
+fi
 
-# Create the project directory
-mkdir "$projectName"
-cd "$projectName" || exit
+# Run the Drupal installer
+echo "Enter project name:"
+read project_name
 
-# Initialize Git repository
-git init
+echo "Creating a \"drupal/recommended-project\" project at \"./\""
+composer create-project drupal/recommended-project:^9 "$project_name"
 
-# Set user name and email for the repository
-read -p "Enter git user name: " userName
-read -p "Enter git user email: " userEmail
+cd "$project_name"
 
-# Configure user name and email for the repository
-git config user.name "$userName"
-git config user.email "$userEmail"
+# Install Drupal dependencies
+echo "Installing dependencies from lock file (including require-dev)"
+composer install
 
-echo "Git repository initialized with user details."
+# Verify lock file contents
+composer diagnose
 
-# Add php version
-read -p "Enter php version to use: " phpVersion
-echo "$phpVersion" > .phpversion
+# Run the Drupal installer
+vendor/bin/drupal site:install --db-type=mysql --db-host=localhost --db-name=your_db_name --db-user=your_db_user --db-pass=your_db_password --site-name=DrupalSite --account-name=admin --account-pass=admin_password
 
-# Initialize Composer project
-composer init --no-interaction --repository=https://packages.drupal.org/8 --name=drupal/project
-
-# Install Drupal core
-composer require drupal/core:~9.0 --no-update
-
-# Create necessary directories
-mkdir core modules profiles sites themes vendor
 
 # Move files to respective directories
-mv vendor .
-mv web/* core/
+mv web/* .
+
+# Move directories to correct locations
 mv web/sites/* sites/
 mv web/modules/* modules/
 mv web/profiles/* profiles/
@@ -48,6 +51,13 @@ mv web/themes/* themes/
 rm -rf web
 
 # Update Composer dependencies
-composer update --no-interaction
+composer update --with-dependencies
+
+# Add required PHP extensions to php.ini
+extension_dir=$(php -i | grep extension_dir | awk '{print $3}')
+echo "extension=gd.so" >> "$extension_dir/php.ini"
+echo "extension=mbstring.so" >> "$extension_dir/php.ini"
+echo "extension=mysqli.so" >> "$extension_dir/php.ini"
+echo "extension=pdo_mysql.so" >> "$extension_dir/php.ini"
 
 echo "Drupal 9 project installation completed."

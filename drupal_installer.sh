@@ -10,6 +10,19 @@ read -p "Enter project name: " projectName
 mkdir "$projectName"
 cd "$projectName" || exit
 
+# Initialize Git repository
+git init
+
+# Set user name and email for the repository
+read -p "Enter git user name: " userName
+read -p "Enter git user email: " userEmail
+
+# Configure user name and email for the repository
+git config user.name "$userName"
+git config user.email "$userEmail"
+
+echo "Git repository initialized with user details."
+
 # Add php version
 read -p "Enter php version to use: " phpVersion
 echo "$phpVersion" > .phpversion

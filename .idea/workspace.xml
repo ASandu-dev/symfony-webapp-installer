@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02713663-4299-4395-a434-e6cf21cd868b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/drupal_installer.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,8 @@
       <updated>1688461379066</updated>
       <workItem from="1688461381458" duration="122000" />
       <workItem from="1688464628207" duration="122000" />
-      <workItem from="1688469105883" duration="16000" />
+      <workItem from="1688469105883" duration="65000" />
+      <workItem from="1688473527274" duration="46000" />
     </task>
     <servers />
   </component>

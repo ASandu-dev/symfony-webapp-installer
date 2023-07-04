@@ -4,6 +4,14 @@
 sudo apt-get update
 sudo apt-get install zsh -y
 
+# Install Git and GitHub CLI
+sudo apt-get install git -y
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt-get update
+sudo apt-get install gh -y
+
+
 # Set Zsh as the default shell
 chsh -s $(which zsh)
 

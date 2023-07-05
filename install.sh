@@ -1,6 +1,3 @@
-To add the installation of PHP version 8.2.7 to the script, you can modify it as follows:
-
-```bash
 #!/bin/bash
 
 # Install Zsh

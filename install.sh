@@ -15,8 +15,8 @@ fi
 
 # Install Symfony CLI
 if ! command -v symfony &> /dev/null; then
-    wget https://get.symfony.com/cli/installer -O - | bash
-    mv /home/$USER/.symfony5/bin/symfony /usr/local/bin/symfony
+    curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
+    sudo apt install symfony-cli
 fi
 
 # Install PHP

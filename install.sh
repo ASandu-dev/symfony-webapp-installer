@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo apt update && sudo apt upgrade
 # Install Composer
 if ! command -v composer &> /dev/null; then
     sudo apt update
